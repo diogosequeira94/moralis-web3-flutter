@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:moralis_web3_flutter/cubit/wallet_cubit.dart';
+import 'package:moralis_web3_flutter/view/account_created_page.dart';
 import 'wallet_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +20,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MoralisPage(title: 'Flutter Demo For Moralis API'),
+      home: BlocProvider(
+          create: (context) => WalletCubit(walletProvider: WalletProvider()),
+          child: const MoralisPage(title: 'Flutter Demo For Moralis API')),
     );
   }
 }
@@ -33,7 +38,6 @@ class MoralisPage extends StatefulWidget {
 class _MoralisPageState extends State<MoralisPage> {
   @override
   Widget build(BuildContext context) {
-    final walletProvider = WalletProvider();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -43,17 +47,42 @@ class _MoralisPageState extends State<MoralisPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              onPressed: () async {
-                final mnemonic = walletProvider.generateMnemonic();
-                final privateKey = await walletProvider.getPrivateKey(mnemonic);
-                final publicKey = walletProvider.getPublicKey(privateKey);
-
-                print('Mnemonic: $mnemonic');
-                print('Private Key: $privateKey');
-                print('Public Key: $publicKey');
+            BlocConsumer<WalletCubit, WalletState>(
+              listener: (context, state) {
+                if (state is WalletSetupSuccess) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AccountCreatedPage(
+                              mnemonic: state.mnemonic,
+                              privateKey: state.privateKey,
+                              address: state.ethereumAddress,
+                            )),
+                  );
+                } else if (state is WalletSetupFailure) {
+                  const snackBar = SnackBar(
+                    content: Text('Oops, something went wrong!'),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
               },
-              child: const Text('Generate Wallet'),
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: () async {
+                    context.read<WalletCubit>().createWallet();
+                  },
+                  child: Row(
+                    children: [
+                      const Text('Generate Wallet'),
+                      if (state is WalletSetupInProgress)
+                        const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                    ],
+                  ),
+                );
+              },
             )
           ],
         ),
