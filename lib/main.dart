@@ -16,9 +16,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        useMaterial3: true,
+      ),
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
           create: (context) => WalletCubit(walletProvider: WalletProvider()),
@@ -40,13 +45,14 @@ class _MoralisPageState extends State<MoralisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const FlutterLogo(size: 150),
+            const SizedBox(height: 50),
             BlocConsumer<WalletCubit, WalletState>(
               listener: (context, state) {
                 if (state is WalletSetupSuccess) {
