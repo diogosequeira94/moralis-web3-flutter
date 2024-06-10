@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'wallet_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,7 @@ class MoralisPage extends StatefulWidget {
 class _MoralisPageState extends State<MoralisPage> {
   @override
   Widget build(BuildContext context) {
+    final walletProvider = WalletProvider();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -42,7 +44,15 @@ class _MoralisPageState extends State<MoralisPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              onPressed: () async {},
+              onPressed: () async {
+                final mnemonic = walletProvider.generateMnemonic();
+                final privateKey = await walletProvider.getPrivateKey(mnemonic);
+                final publicKey = walletProvider.getPublicKey(privateKey);
+
+                print('Mnemonic: $mnemonic');
+                print('Private Key: $privateKey');
+                print('Public Key: $publicKey');
+              },
               child: const Text('Generate Wallet'),
             )
           ],
