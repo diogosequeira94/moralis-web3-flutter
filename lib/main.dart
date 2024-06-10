@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       home: const MoralisPage(title: 'Flutter Demo For Moralis API'),
     );
   }
@@ -36,13 +37,14 @@ class _MoralisPageState extends State<MoralisPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Moralis',
-            ),
+            ElevatedButton(
+              onPressed: () async {},
+              child: const Text('Generate Wallet'),
+            )
           ],
         ),
       ),
