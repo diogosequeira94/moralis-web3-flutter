@@ -72,12 +72,17 @@ class _MoralisPageState extends State<MoralisPage> {
                     context.read<WalletCubit>().createWallet();
                   },
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       const Text('Generate Wallet'),
                       if (state is WalletSetupInProgress)
                         const Padding(
                           padding: EdgeInsets.only(left: 8.0),
-                          child: CircularProgressIndicator(),
+                          child: SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
                     ],
                   ),
