@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MoralisPage(title: 'Flutter Demo For Moralis API '),
+      home: const MoralisPage(title: 'Flutter Demo For Moralis API'),
     );
   }
 }
