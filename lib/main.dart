@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moralis_web3_flutter/cubit/wallet_cubit.dart';
 import 'package:moralis_web3_flutter/data/storage/wallet_local_storage.dart';
@@ -27,7 +28,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
-          create: (context) => WalletCubit(walletProvider: WalletProvider(walletStorage: WalletLocalStorage())),
+          create: (context) => WalletCubit(
+              walletProvider:
+                  WalletProvider(walletStorage: WalletLocalStorage())),
           child: const MoralisPage(title: 'Flutter Demo For Moralis API')),
     );
   }
@@ -52,7 +55,7 @@ class _MoralisPageState extends State<MoralisPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const FlutterLogo(size: 150),
+            const FlutterLogo(size: 175),
             const SizedBox(height: 50),
             BlocConsumer<WalletCubit, WalletState>(
               listener: (context, state) {
@@ -74,28 +77,63 @@ class _MoralisPageState extends State<MoralisPage> {
                 }
               },
               builder: (context, state) {
-                return ElevatedButton(
-                  onPressed: () async {
-                    context.read<WalletCubit>().createWallet();
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text('Generate Wallet'),
-                      if (state is WalletSetupInProgress)
-                        const Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(),
+                return SizedBox(
+                  width: 250,
+                  height: 65,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      context.read<WalletCubit>().createWallet();
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(16.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0))),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'Create Wallet',
+                          style: TextStyle(
+                            fontSize: 18.0,
                           ),
                         ),
-                    ],
+                        if (state is WalletSetupInProgress)
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 );
               },
-            )
+            ),
+            const SizedBox(height: 20.0),
+            SizedBox(
+              width: 250,
+              height: 65,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Colors.white, // Customize button background color
+                    foregroundColor:
+                        Colors.black, // Customize button text color
+                    padding: const EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0))),
+                child: const Text(
+                  'Import from Seed',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
