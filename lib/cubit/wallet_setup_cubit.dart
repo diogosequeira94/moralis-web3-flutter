@@ -15,7 +15,7 @@ class WalletCubit extends Cubit<WalletState> {
     await Future.delayed(const Duration(seconds: 2));
     try {
       final mnemonic = walletProvider.generateMnemonic();
-      final privateKey = await walletProvider.getPrivateKey(mnemonic);
+      final privateKey = await walletProvider.createPrivateKey(mnemonic);
       final publicKey = walletProvider.getPublicKey(privateKey);
 
       emit(WalletSetupSuccess(

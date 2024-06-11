@@ -6,8 +6,9 @@ import 'package:bip39/bip39.dart' as bip39;
 
 abstract class WalletAddressService {
   String generateMnemonic();
-  Future<String> getPrivateKey(String mnemonic);
+  Future<String> createPrivateKey(String mnemonic);
   EthereumAddress getPublicKey(String privateKey);
+  Future<String?> _getPrivateKeyFromStorage();
 }
 
 class WalletProvider implements WalletAddressService {
@@ -20,7 +21,7 @@ class WalletProvider implements WalletAddressService {
   }
 
   @override
-  Future<String> getPrivateKey(String mnemonic) async {
+  Future<String> createPrivateKey(String mnemonic) async {
     /// Pattern to generate public and private keys
     final seed = bip39.mnemonicToSeed(mnemonic);
 
@@ -29,6 +30,9 @@ class WalletProvider implements WalletAddressService {
 
     /// Creates Private key by encoding MasterKey
     final privateKey = HEX.encode(masterKey.key);
+
+    /// Saves Private key in local storage
+    await walletStorage.setPrivateKey(privateKey);
     return privateKey;
   }
 
@@ -37,5 +41,11 @@ class WalletProvider implements WalletAddressService {
     final ethPrivateKey = EthPrivateKey.fromHex(privateKey);
     final address = ethPrivateKey.address;
     return address;
+  }
+
+  @override
+  Future<String?> _getPrivateKeyFromStorage() async {
+    final privateKey = await walletStorage.loadPrivateKey();
+    return privateKey;
   }
 }
