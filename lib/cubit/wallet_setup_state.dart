@@ -1,4 +1,4 @@
-part of 'wallet_cubit.dart';
+part of 'wallet_setup_cubit.dart';
 
 abstract class WalletState extends Equatable {
   const WalletState();

@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:moralis_web3_flutter/data/wallet_provider.dart';
 import 'package:web3dart/credentials.dart';
 
-part 'wallet_state.dart';
+part 'wallet_setup_state.dart';
 
 class WalletCubit extends Cubit<WalletState> {
   WalletCubit({required this.walletProvider}) : super(WalletInitial());

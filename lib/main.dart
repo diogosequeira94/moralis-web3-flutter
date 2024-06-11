@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:moralis_web3_flutter/cubit/wallet_cubit.dart';
+import 'package:moralis_web3_flutter/cubit/wallet_setup_cubit.dart';
 import 'package:moralis_web3_flutter/data/storage/wallet_local_storage.dart';
 import 'package:moralis_web3_flutter/view/account_created_page.dart';
 import 'data/wallet_provider.dart';
