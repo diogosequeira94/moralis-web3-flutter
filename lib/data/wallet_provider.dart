@@ -8,7 +8,7 @@ abstract class WalletAddressService {
   String generateMnemonic();
   Future<String> createPrivateKey(String mnemonic);
   EthereumAddress getPublicKey(String privateKey);
-  Future<String?> _getPrivateKeyFromStorage();
+  Future<EthereumAddress?> getAddressFromStorage();
 }
 
 class WalletProvider implements WalletAddressService {
@@ -44,8 +44,15 @@ class WalletProvider implements WalletAddressService {
   }
 
   @override
-  Future<String?> _getPrivateKeyFromStorage() async {
+  Future<EthereumAddress?> getAddressFromStorage() async {
+    EthereumAddress? address;
     final privateKey = await walletStorage.loadPrivateKey();
-    return privateKey;
+
+    if (privateKey == null) {
+      return null;
+    } else {
+      address = getPublicKey(privateKey);
+      return address;
+    }
   }
 }

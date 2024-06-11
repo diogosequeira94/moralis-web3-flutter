@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moralis_web3_flutter/cubit/mnemonic/mnemonic_verification_cubit.dart';
+import 'package:moralis_web3_flutter/cubit/wallet_information/wallet_information_cubit.dart';
+import 'package:moralis_web3_flutter/data/storage/wallet_local_storage.dart';
+import 'package:moralis_web3_flutter/data/wallet_provider.dart';
 import 'package:moralis_web3_flutter/view/common/standard_button.dart';
+import 'package:moralis_web3_flutter/view/wallet_information_page.dart';
 
 class VerifyMnemonicPage extends StatefulWidget {
   const VerifyMnemonicPage({super.key});
@@ -91,6 +95,25 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                   text: 'Verify',
                   onTap: () {},
                 ),
+              ),
+              const SizedBox(height: 10.0),
+              StandardButton(
+                text: 'Next',
+                onTap: () {
+                  /// ToDo: Create a Registry to have a singleton
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (context) => WalletInformationCubit(
+                            walletProvider: WalletProvider(
+                              walletStorage: WalletLocalStorage(),
+                            ),
+                          )..loadWalletInformation(),
+                          child: const WalletInformationPage(),
+                        ),
+                      ));
+                },
               ),
             ],
           ),
