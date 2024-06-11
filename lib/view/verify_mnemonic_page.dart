@@ -54,18 +54,16 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                     ),
                     itemBuilder: (context, index) {
                       final word = state.currentMnemonic[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2.0),
-                        child: word.isEmpty
-                            ? SizedBox(
-                                width: 100,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 2.0),
+                          child: word.isEmpty
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
                                       '${index + 1}.',
-                                      textAlign: TextAlign.center,
                                       style: const TextStyle(fontSize: 16.0),
                                     ),
                                     SizedBox(
@@ -75,21 +73,24 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                                       ),
                                     ),
                                   ],
+                                )
+                              : Text(
+                                  '${index + 1}. $word',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(fontSize: 16.0),
                                 ),
-                              )
-                            : Text(
-                                '${index + 1}. $word',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(fontSize: 16.0),
-                              ),
+                        ),
                       );
                     },
                   );
                 },
               ),
-              StandardButton(
-                text: 'Next',
-                onTap: () {},
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: StandardButton(
+                  text: 'Verify',
+                  onTap: () {},
+                ),
               ),
             ],
           ),
