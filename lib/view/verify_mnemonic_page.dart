@@ -7,7 +7,7 @@ import 'package:moralis_web3_flutter/cubit/wallet_information/wallet_information
 import 'package:moralis_web3_flutter/data/storage/wallet_local_storage.dart';
 import 'package:moralis_web3_flutter/data/wallet_provider.dart';
 import 'package:moralis_web3_flutter/view/common/standard_button.dart';
-import 'package:moralis_web3_flutter/view/wallet_information_page.dart';
+import 'package:moralis_web3_flutter/view/wallet_information/wallet_information_page.dart';
 
 class VerifyMnemonicPage extends StatefulWidget {
   const VerifyMnemonicPage({super.key});
