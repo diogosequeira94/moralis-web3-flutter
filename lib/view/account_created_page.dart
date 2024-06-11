@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:moralis_web3_flutter/view/copy_clipboard_button.dart';
 import 'package:web3dart/web3dart.dart';
+
+import 'common/standard_button.dart';
 
 class AccountCreatedPage extends StatelessWidget {
   final String mnemonic;
@@ -47,17 +50,24 @@ class AccountCreatedPage extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(
-                  height: 10), // Space between the grid and the text widgets
-              Text('Private Key: $privateKey'),
+              const SizedBox(height: 10),
+              CopyClipBoardButton(textToCopy: mnemonic),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Text('Wallet Address: $address'),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20.0, horizontal: 10.0),
+                child: Column(
+                  children: [
+                    Text('Private Key: $privateKey'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Text('Wallet Address: $address'),
+                    ),
+                  ],
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child:
-                    ElevatedButton(onPressed: () {}, child: const Text('Next')),
+              StandardButton(
+                text: 'Next',
+                onTap: () {},
               ),
             ],
           ),
