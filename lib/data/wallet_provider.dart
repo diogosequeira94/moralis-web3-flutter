@@ -1,5 +1,6 @@
 import 'package:ed25519_hd_key/ed25519_hd_key.dart';
 import 'package:hex/hex.dart';
+import 'package:moralis_web3_flutter/data/storage/wallet_local_storage.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:bip39/bip39.dart' as bip39;
 
@@ -10,6 +11,9 @@ abstract class WalletAddressService {
 }
 
 class WalletProvider implements WalletAddressService {
+  final WalletStorage walletStorage;
+  const WalletProvider({required this.walletStorage});
+
   @override
   String generateMnemonic() {
     return bip39.generateMnemonic();

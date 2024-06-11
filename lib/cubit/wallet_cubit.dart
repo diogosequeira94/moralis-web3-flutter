@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:moralis_web3_flutter/wallet_provider.dart';
+import 'package:moralis_web3_flutter/data/wallet_provider.dart';
 import 'package:web3dart/credentials.dart';
 
 part 'wallet_state.dart';

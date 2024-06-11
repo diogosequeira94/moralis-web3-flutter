@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moralis_web3_flutter/cubit/wallet_cubit.dart';
+import 'package:moralis_web3_flutter/data/storage/wallet_local_storage.dart';
 import 'package:moralis_web3_flutter/view/account_created_page.dart';
-import 'wallet_provider.dart';
+import 'data/wallet_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
-          create: (context) => WalletCubit(walletProvider: WalletProvider()),
+          create: (context) => WalletCubit(walletProvider: WalletProvider(walletStorage: WalletLocalStorage())),
           child: const MoralisPage(title: 'Flutter Demo For Moralis API')),
     );
   }
