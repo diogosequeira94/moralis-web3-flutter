@@ -48,7 +48,7 @@ class AccountCreatedPage extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2.0),
                     child: Text(
-                      '$index. ${mnemonicArray[index]}',
+                      '${index + 1}. ${mnemonicArray[index]}',
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 16.0),
                     ),
@@ -96,7 +96,7 @@ class AccountCreatedPage extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => BlocProvider(
                         create: (context) =>
-                            MnemonicVerificationCubit(mnemonicArray),
+                            MnemonicVerificationCubit(mnemonicArray)..setupRandomMnemonic(),
                         child: const VerifyMnemonicPage(),
                       ),
                     ),

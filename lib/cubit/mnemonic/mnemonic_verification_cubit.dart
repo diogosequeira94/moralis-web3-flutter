@@ -15,7 +15,7 @@ class MnemonicVerificationCubit extends Cubit<MnemonicVerificationState> {
   final List<String> mnemonic;
 
   void setupRandomMnemonic() {
-    final copyList = List.from(mnemonic) as List<String>;
+    final List<String> copyList = List.from(mnemonic);
     final mnemonicLength = mnemonic.length;
     final random = Random();
 

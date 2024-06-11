@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moralis_web3_flutter/cubit/mnemonic/mnemonic_verification_cubit.dart';
 import 'package:moralis_web3_flutter/view/common/standard_button.dart';
@@ -55,9 +57,28 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 2.0),
                         child: word.isEmpty
-                            ? TextField(controller: textEditingController)
+                            ? SizedBox(
+                                width: 100,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      '${index + 1}.',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 16.0),
+                                    ),
+                                    SizedBox(
+                                      width: 100,
+                                      child: TextField(
+                                        controller: textEditingController,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
                             : Text(
-                                '$index. $word',
+                                '${index + 1}. $word',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(fontSize: 16.0),
                               ),
