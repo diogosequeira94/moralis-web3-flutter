@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moralis_web3_flutter/view/common/copy_clipboard_icon.dart';
 import 'package:moralis_web3_flutter/view/copy_clipboard_button.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -52,15 +54,33 @@ class AccountCreatedPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               CopyClipBoardButton(textToCopy: mnemonic),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 20.0, horizontal: 10.0),
+                    vertical: 10.0, horizontal: 10.0),
                 child: Column(
                   children: [
-                    Text('Private Key: $privateKey'),
+                    Wrap(
+                      children: [
+                        Text(
+                          'Private Key: $privateKey',
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
+                        CopyClipBoardIcon(textToCopy: privateKey),
+                      ],
+                    ),
+                    const SizedBox(height: 10.0),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text('Wallet Address: $address'),
+                      child: Wrap(
+                        children: [
+                          Text(
+                            'Wallet Address: $address',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          CopyClipBoardIcon(textToCopy: address.toString()),
+                        ],
+                      ),
                     ),
                   ],
                 ),

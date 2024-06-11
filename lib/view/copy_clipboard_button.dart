@@ -19,6 +19,7 @@ class CopyClipBoardButton extends StatelessWidget {
           _copyToClipBoard();
           const snackBar = SnackBar(
             content: Text('Text copied to clipboard!'),
+            duration: Duration(seconds: 1),
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         },
