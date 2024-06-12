@@ -5,7 +5,6 @@ import 'package:moralis_web3_flutter/view/create_or_import_account_page.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/tabs/assets_tab.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/tabs/stake_tab.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/wallet_information_header.dart';
-import 'package:web3dart/credentials.dart';
 
 import 'tabs/ntfs_tab.dart';
 
@@ -66,7 +65,7 @@ class WalletInformationPage extends StatelessWidget {
                       children: [
                         WalletInformationHeader(
                           address: state.address.toString(),
-                          balance: 400.toString(),
+                          balance: '${432.toString()} €',
                         ),
                         const SizedBox(height: 16.0),
                         Row(
@@ -75,7 +74,8 @@ class WalletInformationPage extends StatelessWidget {
                             Column(
                               children: [
                                 FloatingActionButton(
-                                  heroTag: 'sendButton', // Unique tag for send button
+                                  heroTag:
+                                      'sendButton', // Unique tag for send button
                                   onPressed: () {},
                                   child: const Icon(Icons.send),
                                 ),
@@ -86,7 +86,8 @@ class WalletInformationPage extends StatelessWidget {
                             Column(
                               children: [
                                 FloatingActionButton(
-                                  heroTag: 'refreshButton', // Unique tag for send button
+                                  heroTag:
+                                      'refreshButton', // Unique tag for send button
                                   onPressed: () {},
                                   child: const Icon(Icons.replay_outlined),
                                 ),

@@ -7,32 +7,63 @@ class AssetsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        Card(
-          margin: EdgeInsets.all(16.0),
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        _AssetCardItem(
+            imagePath: 'assets/eth.png', ticker: 'ETH', amount: '444.2'),
+        _AssetCardItem(
+            imagePath: 'assets/hbar.png', ticker: 'HBAR', amount: '1231.5'),
+        _AssetCardItem(
+            imagePath: 'assets/xrd.png', ticker: 'XRD', amount: '500000'),
+      ],
+    );
+  }
+}
+
+class _AssetCardItem extends StatelessWidget {
+  final String imagePath;
+  final String ticker;
+  final String amount;
+  const _AssetCardItem(
+      {super.key,
+      required this.imagePath,
+      required this.ticker,
+      required this.amount});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
               children: [
+                Image.asset(
+                  imagePath,
+                  width: 30,
+                  height: 30,
+                ),
+                const SizedBox(width: 10.0),
                 Text(
-                  'Sepolia ETH',
-                  style: TextStyle(
-                    fontSize: 24.0,
+                  ticker,
+                  style: const TextStyle(
+                    fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                  '444',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
               ],
             ),
-          ),
-        )
-      ],
+            Text(
+              amount,
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
