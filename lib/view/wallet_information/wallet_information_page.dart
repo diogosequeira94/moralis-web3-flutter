@@ -78,7 +78,7 @@ class WalletInformationPage extends StatelessWidget {
                               children: [
                                 FloatingActionButton(
                                   heroTag:
-                                      'sendButton', // Unique tag for send button
+                                      'sendButton',
                                   onPressed: () {
                                     Navigator.push(
                                       context,
@@ -106,7 +106,7 @@ class WalletInformationPage extends StatelessWidget {
                               children: [
                                 FloatingActionButton(
                                   heroTag:
-                                      'refreshButton', // Unique tag for send button
+                                      'refreshButton',
                                   onPressed: () {},
                                   child: const Icon(Icons.replay_outlined),
                                 ),

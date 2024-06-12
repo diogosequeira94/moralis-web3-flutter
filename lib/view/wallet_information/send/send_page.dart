@@ -35,9 +35,16 @@ class _SendTokensPageState extends State<SendTokensPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Image.asset(
+                'assets/eth.png',
+                width: 225,
+                height: 225,
+              ),
+            ),
             TextField(
               controller: recipientController,
               decoration: const InputDecoration(
@@ -53,7 +60,7 @@ class _SendTokensPageState extends State<SendTokensPage> {
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 32.0),
             StandardButton(
               onTap: () {
                 final recipient = recipientController.text;
