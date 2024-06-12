@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:moralis_web3_flutter/view/account_created_page.dart';
+import 'package:moralis_web3_flutter/view/account_created/account_created_page.dart';
 
 import '../cubit/wallet_setup_cubit.dart';
 

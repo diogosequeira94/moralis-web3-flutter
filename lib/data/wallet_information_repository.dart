@@ -11,7 +11,7 @@ class WalletInformationRepository {
       if (response.statusCode == 200) {
         return response.body;
       }
-      return 'Bad bad';
+      return 'Unknown Balance';
     } catch (e) {
       throw Exception('Error getting Balance! $e');
     }

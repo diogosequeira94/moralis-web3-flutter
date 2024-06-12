@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moralis_web3_flutter/cubit/mnemonic/mnemonic_verification_cubit.dart';
 import 'package:moralis_web3_flutter/view/common/copy_clipboard_icon.dart';
-import 'package:moralis_web3_flutter/view/copy_clipboard_button.dart';
+import 'package:moralis_web3_flutter/view/account_created/copy_clipboard_button.dart';
 import 'package:moralis_web3_flutter/view/verify_mnemonic_page.dart';
 import 'package:web3dart/web3dart.dart';
 
-import 'common/standard_button.dart';
+import '../common/standard_button.dart';
 
 class AccountCreatedPage extends StatelessWidget {
   final String mnemonic;
