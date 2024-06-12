@@ -9,6 +9,7 @@ abstract class WalletAddressService {
   Future<String> createPrivateKey(String mnemonic);
   EthereumAddress getPublicKey(String privateKey);
   Future<EthereumAddress?> getAddressFromStorage();
+  Future<void> performLogout();
 }
 
 class WalletProvider implements WalletAddressService {
@@ -54,5 +55,10 @@ class WalletProvider implements WalletAddressService {
       address = getPublicKey(privateKey);
       return address;
     }
+  }
+
+  @override
+  Future<void> performLogout() async {
+    await walletStorage.cleanUpStorage();
   }
 }

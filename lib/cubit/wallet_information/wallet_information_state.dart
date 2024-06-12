@@ -25,3 +25,8 @@ class WalletInformationError extends WalletInformationState {
   @override
   List<Object> get props => [];
 }
+
+class WalletLogoutSuccess extends WalletInformationState {
+  @override
+  List<Object> get props => [];
+}

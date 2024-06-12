@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moralis_web3_flutter/cubit/wallet_information/wallet_information_cubit.dart';
+import 'package:moralis_web3_flutter/view/create_or_import_account_page.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/tabs/assets_tab.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/tabs/stake_tab.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/wallet_information_header.dart';
+import 'package:web3dart/credentials.dart';
 
 import 'tabs/ntfs_tab.dart';
 
@@ -16,17 +18,31 @@ class WalletInformationPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Wallet Information'),
         actions: [
-          PopupMenuButton<String>(
-            onSelected: (String result) {
-              if (result == 'Logout') {}
+          BlocListener<WalletInformationCubit, WalletInformationState>(
+            listener: (context, state) {
+              if (state is WalletLogoutSuccess) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CreateOrImportAccountPage(),
+                  ),
+                );
+              }
             },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
-                value: 'Logout',
-                child: Text('Logout'),
-              ),
-            ],
-            icon: const Icon(Icons.settings),
+            child: PopupMenuButton<String>(
+              onSelected: (String result) {
+                if (result == 'Logout') {
+                  context.read<WalletInformationCubit>().onLogoutPressed();
+                }
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                const PopupMenuItem<String>(
+                  value: 'Logout',
+                  child: Text('Logout'),
+                ),
+              ],
+              icon: const Icon(Icons.settings),
+            ),
           ),
         ],
       ),

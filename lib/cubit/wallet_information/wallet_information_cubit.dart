@@ -21,4 +21,9 @@ class WalletInformationCubit extends Cubit<WalletInformationState> {
       emit(WalletInformationError());
     }
   }
+
+  void onLogoutPressed() {
+    _walletProvider.performLogout();
+    emit(WalletLogoutSuccess());
+  }
 }
