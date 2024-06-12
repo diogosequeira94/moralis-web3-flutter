@@ -1,19 +1,35 @@
-import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class WalletInformationRepository {
-  Future<String> getBalance(String address, String chain) async {
-    final url = Uri.http('someEndpoint', '/get_token_balance', {
+import 'package:http/http.dart' as http;
+import 'package:web3dart/web3dart.dart';
+
+abstract class MoralisWalletRepository {
+  Future<double> getBalanceByToken(String address, String chain);
+}
+
+class WalletRepository implements MoralisWalletRepository {
+  @override
+  Future<double> getBalanceByToken(String address, String chain) async {
+    final queryParams = {
       'address': address,
       'chain': chain,
-    });
+    };
+    final url = Uri.http('someEndpoint', '/get_token_balance', queryParams);
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        return response.body;
+        final dynamic data = json.decode(response.body);
+        return data['balance'] ?? 0.0;
       }
-      return 'Unknown Balance';
+      return 0.0000;
     } catch (e) {
       throw Exception('Error getting Balance! $e');
     }
+  }
+
+  String convertBalanceToEthereum(double balance) {
+    final ethBalance =
+        EtherAmount.fromBigInt(EtherUnit.wei, BigInt.parse(balance.toString()));
+    return ethBalance.getValueInUnit(EtherUnit.ether).toString();
   }
 }
