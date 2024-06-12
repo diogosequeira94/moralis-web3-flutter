@@ -6,7 +6,9 @@ import 'package:web3dart/web3dart.dart';
 
 abstract class MoralisWalletRepository {
   Future<double> getBalanceByToken(String address, String chain);
-  Future<List<NFT>> getNFTsList(String address, String chain);
+  Future<List<NFT>?> getNFTsList(String address, String chain);
+  Future<String> sendTransaction(
+      String privateKey, String receiver, EtherAmount txValue);
 }
 
 class WalletRepository implements MoralisWalletRepository {
@@ -36,20 +38,55 @@ class WalletRepository implements MoralisWalletRepository {
   }
 
   @override
-  Future<List<NFT>> getNFTsList(String address, String chain) async {
-    final response = await http.get(
-        Uri.parse(
-            'http://localhost:5050/get_user_nfts?address=$address&chain=$chain'),
-        headers: {'Content-Type': 'application/json'});
+  Future<List<NFT>?> getNFTsList(String address, String chain) async {
+    final headers = {'Content-Type': 'application/json'};
+    try {
+      final response = await http.get(
+          Uri.parse(
+              'http://localhost:5050/get_user_nfts?address=$address&chain=$chain'),
+          headers: headers);
 
-    if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body) as List;
-      final nftsList = jsonData
-          .map((json) => NFT.fromJson(json as Map<String, dynamic>))
-          .toList();
-      return nftsList;
-    } else {
-      throw Exception('Failed to load NFT list');
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body) as List;
+        final nftsList = jsonData
+            .map((json) => NFT.fromJson(json as Map<String, dynamic>))
+            .toList();
+        return nftsList;
+      }
+      return null;
+    } catch (e) {
+      throw Exception('Failed to load NFT list $e');
+    }
+  }
+
+  @override
+  Future<String> sendTransaction(
+      String privateKey, String receiver, EtherAmount txValue) async {
+    const apiUrl = "Your RPC Url"; // Replace with your API
+    // Replace with your API
+    final httpClient = http.Client();
+    final ethClient = Web3Client(apiUrl, httpClient);
+    try {
+      EthPrivateKey credentials = EthPrivateKey.fromHex('0x$privateKey');
+
+      EtherAmount etherAmount = await ethClient.getBalance(credentials.address);
+      EtherAmount gasPrice = await ethClient.getGasPrice();
+
+      print(etherAmount);
+
+      final transactionId = await ethClient.sendTransaction(
+        credentials,
+        Transaction(
+          to: EthereumAddress.fromHex(receiver),
+          gasPrice: gasPrice,
+          maxGas: 100000,
+          value: txValue,
+        ),
+        chainId: 11155111,
+      );
+      return transactionId;
+    } catch (e) {
+      throw Exception('Failed to send transaction: $e');
     }
   }
 }

@@ -5,10 +5,8 @@ class StakeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: const Icon(Icons.beenhere_rounded),
-      title: const Text('Stake Here'),
-      onTap: () {},
+    return const Center(
+      child: Text('Staking will be available soon'),
     );
   }
 }

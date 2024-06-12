@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moralis_web3_flutter/cubit/transactions/transactions_cubit.dart';
 import 'package:moralis_web3_flutter/cubit/wallet_information/wallet_information_cubit.dart';
+import 'package:moralis_web3_flutter/data/wallet_information_repository.dart';
 import 'package:moralis_web3_flutter/view/create_or_import_account_page.dart';
+import 'package:moralis_web3_flutter/view/wallet_information/send/send_page.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/tabs/assets_tab.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/tabs/stake_tab.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/wallet_information_header.dart';
@@ -76,7 +79,23 @@ class WalletInformationPage extends StatelessWidget {
                                 FloatingActionButton(
                                   heroTag:
                                       'sendButton', // Unique tag for send button
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => BlocProvider(
+                                          create: (context) =>
+                                              TransactionsCubit(
+                                            WalletRepository(),
+                                          ),
+                                          child: SendTokensPage(
+                                            privateKey:
+                                                state.address.toString(),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   child: const Icon(Icons.send),
                                 ),
                                 const SizedBox(height: 8.0),
