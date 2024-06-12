@@ -25,8 +25,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     final privateKey = preferences.getString('privateKey');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 1), () {
-        final walletProvider =
-            WalletProvider(walletStorage: WalletLocalStorage());
+        final walletProvider = WalletProvider(walletStorage: WalletLocalStorage());
         if (privateKey != null) {
           Navigator.pushReplacement(
             context,

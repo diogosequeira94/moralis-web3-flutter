@@ -17,8 +17,7 @@ class StandardButton extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(16.0),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0))),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0))),
         child: Text(
           text,
           style: const TextStyle(

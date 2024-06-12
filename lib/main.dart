@@ -1,10 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:moralis_web3_flutter/cubit/wallet_setup_cubit.dart';
-import 'package:moralis_web3_flutter/data/storage/wallet_local_storage.dart';
-import 'package:moralis_web3_flutter/view/create_or_import_account_page.dart';
-import 'data/wallet_provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moralis_web3_flutter/view/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,11 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-          create: (context) => WalletCubit(
-              walletProvider:
-                  WalletProvider(walletStorage: WalletLocalStorage())),
-          child: const CreateOrImportAccountPage()),
+      home: const SplashScreenPage(),
     );
   }
 }

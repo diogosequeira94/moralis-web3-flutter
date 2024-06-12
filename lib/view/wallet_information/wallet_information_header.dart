@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WalletInformationHeader extends StatelessWidget {
-  const WalletInformationHeader(
-      {super.key, required this.address, required this.balance});
+  const WalletInformationHeader({super.key, required this.address, required this.balance});
 
   final String address;
   final String balance;

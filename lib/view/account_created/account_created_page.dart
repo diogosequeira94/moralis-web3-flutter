@@ -59,8 +59,7 @@ class AccountCreatedPage extends StatelessWidget {
               CopyClipBoardButton(textToCopy: mnemonic),
               const SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                 child: Column(
                   children: [
                     Wrap(
@@ -95,8 +94,7 @@ class AccountCreatedPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider(
-                        create: (context) =>
-                            MnemonicVerificationCubit(mnemonicArray)..setupRandomMnemonic(),
+                        create: (context) => MnemonicVerificationCubit(mnemonicArray)..setupRandomMnemonic(),
                         child: const VerifyMnemonicPage(),
                       ),
                     ),

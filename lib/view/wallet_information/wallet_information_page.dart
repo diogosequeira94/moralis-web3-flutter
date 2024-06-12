@@ -75,8 +75,7 @@ class WalletInformationPage extends StatelessWidget {
                             Column(
                               children: [
                                 FloatingActionButton(
-                                  heroTag:
-                                      'sendButton', // Unique tag for send button
+                                  heroTag: 'sendButton', // Unique tag for send button
                                   onPressed: () {},
                                   child: const Icon(Icons.send),
                                 ),
@@ -87,8 +86,7 @@ class WalletInformationPage extends StatelessWidget {
                             Column(
                               children: [
                                 FloatingActionButton(
-                                  heroTag:
-                                      'refreshButton', // Unique tag for send button
+                                  heroTag: 'refreshButton', // Unique tag for send button
                                   onPressed: () {},
                                   child: const Icon(Icons.replay_outlined),
                                 ),

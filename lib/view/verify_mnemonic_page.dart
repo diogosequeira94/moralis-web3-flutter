@@ -49,8 +49,7 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     // To prevent GridView from scrolling separately
                     itemCount: state.currentMnemonic.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 2,
                       crossAxisSpacing: 2,

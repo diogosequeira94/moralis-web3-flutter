@@ -48,8 +48,7 @@ class CreateOrImportAccountPage extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(16.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0))),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0))),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -81,13 +80,10 @@ class CreateOrImportAccountPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Colors.white, // Customize button background color
-                    foregroundColor:
-                        Colors.black, // Customize button text color
+                    backgroundColor: Colors.white, // Customize button background color
+                    foregroundColor: Colors.black, // Customize button text color
                     padding: const EdgeInsets.all(16.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0))),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0))),
                 child: const Text(
                   'Import from Seed',
                   style: TextStyle(
