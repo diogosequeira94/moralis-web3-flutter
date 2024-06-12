@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moralis_web3_flutter/cubit/wallet_information/wallet_information_cubit.dart';
-import 'package:moralis_web3_flutter/view/account_created_page.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/tabs/assets_tab.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/tabs/stake_tab.dart';
 import 'package:moralis_web3_flutter/view/wallet_information/wallet_information_header.dart';
@@ -16,6 +15,20 @@ class WalletInformationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wallet Information'),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (String result) {
+              if (result == 'Logout') {}
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'Logout',
+                child: Text('Logout'),
+              ),
+            ],
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
