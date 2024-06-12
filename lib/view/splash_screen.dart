@@ -18,49 +18,70 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   late SharedPreferences preferences;
+  late String? privateKey;
+
   @override
-  void initState() async {
+  void initState() {
     super.initState();
+    _checkPrivateKey();
+  }
+
+  Future<void> _checkPrivateKey() async {
     preferences = await SharedPreferences.getInstance();
-    final privateKey = preferences.getString('privateKey');
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(seconds: 1), () {
-        final walletProvider = WalletProvider(walletStorage: WalletLocalStorage());
-        if (privateKey != null) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BlocProvider(
-                create: (context) => WalletInformationCubit(
-                  walletProvider: walletProvider,
-                )..loadWalletInformation(),
-                child: const WalletInformationPage(),
-              ),
-            ),
+    privateKey = preferences.getString('privateKey');
+  }
+
+  void _navigateToNextPage() {
+    final walletProvider = WalletProvider(walletStorage: WalletLocalStorage());
+    Widget nextPage;
+    if (privateKey != null) {
+      nextPage = BlocProvider(
+        create: (context) => WalletInformationCubit(
+          walletProvider: walletProvider,
+        )..loadWalletInformation(),
+        child: const WalletInformationPage(),
+      );
+    } else {
+      nextPage = BlocProvider(
+        create: (context) => WalletCubit(
+          walletProvider: walletProvider,
+        ),
+        child: const CreateOrImportAccountPage(),
+      );
+    }
+
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => nextPage,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = 0.0;
+          const end = 1.0;
+          const curve = Curves.easeInOut;
+
+          var tween = Tween(begin: begin, end: end).chain(
+            CurveTween(curve: curve),
           );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BlocProvider(
-                create: (context) => WalletCubit(
-                  walletProvider: walletProvider,
-                ),
-                child: const CreateOrImportAccountPage(),
-              ),
-            ),
+
+          return FadeTransition(
+            opacity: animation.drive(tween),
+            child: child,
           );
-        }
-      });
-    });
+        },
+        transitionDuration: const Duration(milliseconds: 500),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 2), _navigateToNextPage);
+    });
     return const Scaffold(
       body: Center(
         child: FlutterLogo(
-          size: 50.0,
+          size: 250.0,
         ),
       ),
     );
