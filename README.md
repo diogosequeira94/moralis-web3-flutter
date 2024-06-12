@@ -1,16 +1,11 @@
-# moralis_web3_flutter
+# Web3 Wallet
 
-A Moralis Web3 Wallet
+Web3 wallet to create Eth Accounts and integrate wth Moralis API
 
-## Getting Started
+## Preview
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p align="left">
+    <img src="https://github.com/diogosequeira94/web3_moralis_wallet/assets/17165238/e2a2d094-0c8e-4724-941a-c8d0aa8bc3ae" width="250px"/>  
+    <img src="https://github.com/diogosequeira94/web3_moralis_wallet/assets/17165238/e2b8101b-7117-4264-b5c3-d62b4bf19929" width="250px"/>  
+    <img src="https://github.com/diogosequeira94/web3_moralis_wallet/assets/17165238/1b1be251-1a50-431b-ae01-d55004fbbafe" width="250px"/>  
+</p>
